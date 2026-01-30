@@ -42,6 +42,7 @@ header {
   padding: 24px 32px;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
 }
 
@@ -85,17 +86,20 @@ main {
   margin: 0 auto 32px;
 }
 
-.app-store-badge {
+.app-store-button {
   display: inline-block;
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+  padding: 14px 28px;
+  border-radius: var(--border-radius);
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
   transition: opacity 0.2s ease;
 }
 
-.app-store-badge:hover {
-  opacity: 0.8;
-}
-
-.app-store-badge img {
-  height: 48px;
+.app-store-button:hover {
+  opacity: 0.85;
 }
 
 /* Requirements section */
