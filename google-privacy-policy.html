@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google OAuth Privacy Policy - Orchestrator</title>
+  <meta name="description" content="Google OAuth Privacy Policy for Orchestrator">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+</head>
+<body>
+  <header>
+    <a href="index.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit;">
+      <img src="assets/logo.png" alt="Orchestrator" class="logo">
+      <span class="wordmark">Orchestrator</span>
+    </a>
+  </header>
+
+  <div class="legal-content">
+    <h1>Google OAuth Privacy Policy</h1>
+    <p class="updated">Last updated: February 13, 2026</p>
+
+    <p>Agora Labs Inc. ("we", "us", or "our") operates Orchestrator, a native macOS desktop application for AI-assisted knowledge work. This Privacy Policy describes how we collect, use, protect, and handle your information when you use Orchestrator and its connected services, including integrations with Google APIs (Gmail, Google Calendar, and Google Drive).</p>
+
+    <p>Orchestrator's use and transfer of information received from Google APIs to any other app will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>, including the Limited Use requirements.</p>
+
+    <h2>1. Information We Collect</h2>
+    <p>When you connect Orchestrator to Google services via OAuth, we access the following categories of data on your behalf:</p>
+
+    <h3>Gmail</h3>
+    <ul>
+      <li><strong>Email metadata</strong> (sender, recipient, subject, date) and message body content</li>
+      <li><strong>Email labels and organization</strong></li>
+      <li><strong>Draft email content</strong> created on your behalf</li>
+    </ul>
+
+    <h3>Google Calendar</h3>
+    <ul>
+      <li><strong>Calendar event details</strong> (title, time, duration, location, description)</li>
+      <li><strong>Attendee information</strong></li>
+      <li><strong>Calendar metadata</strong> (calendar names and IDs)</li>
+    </ul>
+
+    <h3>Google Drive (including Google Docs, Sheets, and Slides)</h3>
+    <ul>
+      <li><strong>File metadata</strong> (name, type, size, modification date)</li>
+      <li><strong>File content</strong> (document text, spreadsheet data, presentation text) exported from native Google Workspace formats</li>
+      <li><strong>Folder structure and organization</strong></li>
+    </ul>
+
+    <h3>Account Information</h3>
+    <ul>
+      <li><strong>Your Google account email address</strong> (used solely to identify the authenticated account)</li>
+    </ul>
+
+    <h2>2. How We Use Your Data</h2>
+    <p>All Google user data is accessed exclusively to provide or improve user-facing features within Orchestrator. Specifically:</p>
+    <ul>
+      <li><strong>On-demand access only:</strong> We only access your Google data when you explicitly request it through an AI agent interaction (e.g., "check my email", "what meetings do I have today", "find the Q4 report in Drive").</li>
+      <li><strong>Scheduled automation:</strong> If you configure scheduled jobs (e.g., a daily briefing), data is accessed at the scheduled time to fulfill your configured automation. You control which automations run and can disable them at any time.</li>
+      <li><strong>No persistent storage of Google data:</strong> Google user data (emails, calendar events, files) is processed in-memory during the active session and is not written to disk or stored on any server.</li>
+      <li><strong>No AI model training:</strong> Your Google data is never used to train, fine-tune, or improve any artificial intelligence or machine learning models.</li>
+      <li><strong>No selling or sharing:</strong> We do not sell, rent, trade, or otherwise transfer your Google user data to any third party, including advertising platforms, data brokers, or information resellers.</li>
+      <li><strong>No advertising:</strong> Google user data is never used for advertising, ad targeting, retargeting, or personalized marketing of any kind.</li>
+    </ul>
+
+    <h2>3. Data Protection Mechanisms</h2>
+    <p>We implement the following security measures to protect your sensitive Google user data:</p>
+
+    <h3>Encryption</h3>
+    <ul>
+      <li><strong>Data in transit:</strong> All communication between Orchestrator and Google APIs is encrypted using TLS 1.2 or higher (HTTPS). No Google user data is ever transmitted over unencrypted channels.</li>
+      <li><strong>Data at rest:</strong> OAuth tokens and credentials are stored exclusively in the macOS Keychain, which provides hardware-backed AES-256 encryption. Google user data (emails, events, files) is not persisted to disk.</li>
+    </ul>
+
+    <h3>Access Controls</h3>
+    <ul>
+      <li><strong>Local-first architecture:</strong> Orchestrator is a native macOS desktop application. Google API calls are made directly from the user's device. There is no intermediary server that stores or relays Google user data.</li>
+      <li><strong>Per-user authentication:</strong> Each user authenticates with their own Google account via OAuth 2.0. Tokens are scoped to the individual user and stored in their personal macOS Keychain, which is protected by the user's system login credentials.</li>
+      <li><strong>Principle of least privilege:</strong> We request only the OAuth scopes necessary to provide the specific features described in this policy. Users can disconnect any service at any time, which immediately revokes the associated OAuth token.</li>
+    </ul>
+
+    <h3>Secure Token Management</h3>
+    <ul>
+      <li>OAuth tokens are stored in the macOS Keychain, never in plain text, configuration files, or application databases.</li>
+      <li>Refresh tokens are used to maintain persistent access for scheduled automations, eliminating the need to store user passwords.</li>
+      <li>When a user disconnects a service, the OAuth token is immediately deleted from the Keychain and revoked with Google's authorization server.</li>
+    </ul>
+
+    <h3>Organizational Security</h3>
+    <ul>
+      <li>All employees, contractors, and agents with access to application infrastructure are required to comply with this privacy policy and our internal data handling procedures.</li>
+      <li>Our OAuth client credentials (client ID and client secret) are stored securely and are never exposed in client-side code or public repositories.</li>
+      <li>We conduct regular security reviews of our codebase and authentication flows to identify and remediate potential vulnerabilities.</li>
+    </ul>
+
+    <h2>4. Data Retention and Deletion</h2>
+    <ul>
+      <li><strong>Google user data is not retained.</strong> Emails, calendar events, and files are processed in-memory during the active session and are not stored on disk or on any server.</li>
+      <li><strong>OAuth tokens</strong> are stored in the macOS Keychain for the duration of the connection. When you disconnect a service, the token is immediately deleted and revoked.</li>
+      <li><strong>You can request deletion</strong> of any associated data at any time by contacting us at <a href="mailto:orchestrator@voteagora.com">orchestrator@voteagora.com</a>.</li>
+    </ul>
+
+    <h2>5. Google API Services Limited Use Disclosure</h2>
+    <p>Orchestrator's use and transfer of information received from Google APIs adheres to the <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>, including the Limited Use requirements. Specifically:</p>
+    <ol>
+      <li>We only use Google user data to provide or improve user-facing features that are prominent in Orchestrator's user interface.</li>
+      <li>We do not transfer Google user data to third parties except as necessary to provide or improve user-facing features, to comply with applicable law, or as part of a merger or acquisition with explicit user consent.</li>
+      <li>We do not use Google user data for serving advertisements, including retargeting, personalized, or interest-based advertising.</li>
+      <li>We do not allow humans to read Google user data unless: (a) we have the user's affirmative agreement, (b) it is necessary for security purposes (e.g., investigating abuse), or (c) it is necessary to comply with applicable law.</li>
+    </ol>
+
+    <h2>6. Your Rights</h2>
+    <p>You have full control over your Google data access:</p>
+    <ul>
+      <li><strong>Disconnect at any time:</strong> Revoke Orchestrator's access from the Connected Services panel within the application, or from your Google Account's security settings at <a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a>.</li>
+      <li><strong>Request data deletion:</strong> Contact us at <a href="mailto:orchestrator@voteagora.com">orchestrator@voteagora.com</a> to request deletion of any data associated with your account.</li>
+      <li><strong>Inquire about your data:</strong> Contact us to ask what data, if any, we hold related to your use of Orchestrator.</li>
+    </ul>
+
+    <h2>7. Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. If we make material changes to how we handle Google user data, we will notify users through the application and update the "Last updated" date at the top of this page. Continued use of Orchestrator after changes constitutes acceptance of the updated policy.</p>
+
+    <h2>8. Contact Us</h2>
+    <p>If you have questions about this Privacy Policy or our data practices, contact us at:</p>
+    <p><strong>Agora Labs Inc.</strong><br>
+    Email: <a href="mailto:orchestrator@voteagora.com">orchestrator@voteagora.com</a><br>
+    Direct: <a href="mailto:charlie@voteagora.com">charlie@voteagora.com</a></p>
+  </div>
+
+  <footer>
+    <nav class="footer-links">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="google-privacy-policy.html">Google OAuth Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+    </nav>
+    <p class="copyright">&copy; 2026 Argonavis Labs. All rights reserved.</p>
+  </footer>
+</body>
+</html>
