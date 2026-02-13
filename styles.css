@@ -216,6 +216,23 @@ footer {
   margin-bottom: 12px;
 }
 
+.legal-content h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+
+.legal-content ol {
+  margin-bottom: 16px;
+  padding-left: 24px;
+  color: var(--text-secondary);
+}
+
+.legal-content ol li {
+  margin-bottom: 8px;
+}
+
 .legal-content p {
   margin-bottom: 16px;
   color: var(--text-secondary);
@@ -229,6 +246,15 @@ footer {
 
 .legal-content li {
   margin-bottom: 8px;
+}
+
+.legal-content a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.legal-content a:hover {
+  text-decoration: underline;
 }
 
 /* Responsive */
