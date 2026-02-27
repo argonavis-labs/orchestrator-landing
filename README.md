@@ -6,8 +6,11 @@ Static marketing site for [Orchestrator](https://apps.apple.com/app/orchestrator
 
 - **`index.html`** — Landing page
 - **`privacy.html`** — Privacy Policy
+- **`eula.html`** — End-User License Agreement (EULA)
 - **`terms.html`** — Terms of Service
 - **`google-privacy-policy.html`** — Google OAuth Privacy Policy
+- **`quickbooks-privacy-policy.html`** — QuickBooks OAuth Privacy Policy
+- **`quickbooks-data-deletion.html`** — QuickBooks data deletion instructions
 
 ## Development
 
