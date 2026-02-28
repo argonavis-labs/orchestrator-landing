@@ -56,6 +56,10 @@ gcloud projects add-iam-policy-binding "${PROJECT_ID}" \
   --member "serviceAccount:${DEPLOYER_SA}@${PROJECT_ID}.iam.gserviceaccount.com" \
   --role "roles/artifactregistry.writer"
 
+gcloud projects add-iam-policy-binding "${PROJECT_ID}" \
+  --member "serviceAccount:${DEPLOYER_SA}@${PROJECT_ID}.iam.gserviceaccount.com" \
+  --role "roles/storage.admin"
+
 gcloud iam service-accounts add-iam-policy-binding \
   "${PROJECT_NUMBER}-compute@developer.gserviceaccount.com" \
   --project "${PROJECT_ID}" \
