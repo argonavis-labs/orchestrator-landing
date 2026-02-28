@@ -5,39 +5,91 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Orchestrator - Orchestrate your AI agents</title>
   <meta name="description" content="Orchestrator is a native macOS app for orchestrating Claude Code agents. Plan tasks and let AI agents execute them continuously.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" type="image/png" href="assets/logo.png">
   <link rel="apple-touch-icon" href="assets/logo.png">
 </head>
 <body>
-  <header>
-    <img src="assets/logo.png" alt="Orchestrator" class="logo">
-    <span class="wordmark">Orchestrator</span>
+  <div class="announcement">
+    <p>Orchestrator for macOS is live.</p>
+    <a href="https://apps.apple.com/app/orchestrator">Download now</a>
+  </div>
+
+  <header class="site-header">
+    <a href="index.html" class="brand">
+      <img src="assets/logo.png" alt="Orchestrator" class="logo">
+      <span class="wordmark">Orchestrator</span>
+    </a>
+    <nav class="top-nav">
+      <a href="#features">Features</a>
+      <a href="#workflow">Workflow</a>
+      <a href="mailto:support@orchest.org">Contact</a>
+    </nav>
   </header>
 
   <main>
-    <section class="hero">
-      <h1>Orchestrate your AI agents</h1>
-      <p>A native macOS app for orchestrating Claude Code agents. Plan your tasks, then let AI agents execute them continuously while you focus on what matters.</p>
-      <a href="https://ztfatrpxjq1.typeform.com/to/ENX1vKNF" class="app-store-button">
-        Join the Waitlist
-      </a>
+    <section class="hero" id="workflow">
+      <p class="eyebrow">Native AI Operator Desk</p>
+      <h1>Superpowers for every agent run.</h1>
+      <p class="hero-copy">Plan once, assign work, and stay in control while your agents execute continuously in the background.</p>
+      <div class="hero-actions">
+        <a href="https://apps.apple.com/app/orchestrator" class="app-store-button">
+          Get Orchestrator
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+        <a href="#features" class="secondary-button">See capabilities</a>
+      </div>
+      <div class="hero-panels" aria-hidden="true">
+        <article class="panel">
+          <h3>Live Queue</h3>
+          <p>3 tasks in flight</p>
+          <ul>
+            <li>Sync docs to repo</li>
+            <li>Draft outreach response</li>
+            <li>Run QA smoke check</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <h3>Context Lock</h3>
+          <p>Project: orchestrator-landing</p>
+          <ul>
+            <li>1 active branch</li>
+            <li>2 policy docs loaded</li>
+            <li>No critical blockers</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <h3>Execution Feed</h3>
+          <p>Latest update 12s ago</p>
+          <ul>
+            <li>Deployed to Cloud Run</li>
+            <li>Checked domain mapping</li>
+            <li>Published release notes</li>
+          </ul>
+        </article>
+      </div>
     </section>
 
     <section class="requirements">
       <p><strong>Requires macOS 14.0 or later</strong> and a Claude API key from Anthropic.</p>
     </section>
 
-    <section class="features">
+    <section class="features" id="features">
       <div class="feature">
+        <p class="feature-kicker">Plan</p>
         <h3>Plan tasks for agents</h3>
         <p>Break down complex projects into manageable tasks. Define what needs to be done and let your AI agents handle the execution.</p>
       </div>
       <div class="feature">
+        <p class="feature-kicker">Monitor</p>
         <h3>Monitor execution in real-time</h3>
         <p>Watch your agents work with live progress updates. Stay informed without getting in the way.</p>
       </div>
       <div class="feature">
+        <p class="feature-kicker">Ship</p>
         <h3>Native macOS experience</h3>
         <p>Built specifically for Mac with a clean, minimal interface that feels right at home on your desktop.</p>
       </div>
