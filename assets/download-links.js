@@ -1,53 +1,78 @@
-const RELEASE_DOWNLOAD_BASE = 'https://storage.googleapis.com/orchestrator-releases/electron/stable';
+const STABLE_DOWNLOAD_LINKS_FEED_URL =
+  'https://pub-a1d23b8b58f1451e84aa55f4ba5b850d.r2.dev/electron/stable/download-links.json';
+
+const FALLBACK_DOWNLOAD_URLS = Object.freeze({
+  mac: 'https://storage.googleapis.com/orchestrator-releases/electron/stable/Orchestrator-arm64.dmg',
+  macIntel: 'https://storage.googleapis.com/orchestrator-releases/electron/stable/Orchestrator-x64.dmg',
+  windows: 'https://storage.googleapis.com/orchestrator-releases/electron/stable/Orchestrator-x64.exe',
+  linux: 'https://storage.googleapis.com/orchestrator-releases/electron/stable/Orchestrator-x86_64.AppImage',
+});
+
+const PLATFORM_BY_LABEL = Object.freeze({
+  'Mac (Silicon)': 'mac',
+  // Legacy label support to avoid breaking older cached HTML/JS.
+  Mac: 'mac',
+  'Mac (Intel)': 'macIntel',
+  Windows: 'windows',
+  Linux: 'linux',
+});
+
+let resolvedDownloadUrlsPromise;
 
 function knownPlatformLabel(label) {
-  return label === 'Mac' || label === 'Mac (Intel)' || label === 'Windows' || label === 'Linux';
+  return Object.prototype.hasOwnProperty.call(PLATFORM_BY_LABEL, label);
 }
 
-async function resolveMacAssetName(label) {
-  if (label === 'Mac (Intel)') {
-    return 'Orchestrator-x64.dmg';
+function normalizeFeedLinks(payload) {
+  const links = payload && typeof payload === 'object' ? payload.links : null;
+  if (!links || typeof links !== 'object') {
+    return null;
   }
 
-  try {
-    if (navigator.userAgentData?.getHighEntropyValues) {
-      const values = await navigator.userAgentData.getHighEntropyValues(['architecture']);
-      const arch = (values?.architecture || '').toLowerCase();
-      if (arch.includes('arm')) {
-        return 'Orchestrator-arm64.dmg';
+  const mac = typeof links.mac === 'string' ? links.mac : '';
+  const macIntel = typeof links.macIntel === 'string' ? links.macIntel : '';
+  const windows = typeof links.windows === 'string' ? links.windows : '';
+  const linux = typeof links.linux === 'string' ? links.linux : '';
+
+  if (!mac || !macIntel || !windows || !linux) {
+    return null;
+  }
+
+  return { mac, macIntel, windows, linux };
+}
+
+async function resolveDownloadUrls() {
+  if (!resolvedDownloadUrlsPromise) {
+    resolvedDownloadUrlsPromise = (async () => {
+      try {
+        const response = await fetch(STABLE_DOWNLOAD_LINKS_FEED_URL, {
+          cache: 'no-store',
+        });
+        if (!response.ok) {
+          throw new Error(`download links feed returned ${response.status}`);
+        }
+        const payload = await response.json();
+        const normalized = normalizeFeedLinks(payload);
+        if (normalized) {
+          return normalized;
+        }
+      } catch {
+        // Fall through to static defaults.
       }
-      if (arch.includes('x86') || arch.includes('64')) {
-        return 'Orchestrator-x64.dmg';
-      }
-    }
-  } catch {
-    // Ignore UA hints failures and fall through to user-agent sniffing.
+      return FALLBACK_DOWNLOAD_URLS;
+    })();
   }
-
-  const userAgent = (navigator.userAgent || '').toLowerCase();
-  if (userAgent.includes('arm64') || userAgent.includes('aarch64') || userAgent.includes('apple silicon')) {
-    return 'Orchestrator-arm64.dmg';
-  }
-  if (userAgent.includes('intel') || userAgent.includes('x86_64') || userAgent.includes('x64')) {
-    return 'Orchestrator-x64.dmg';
-  }
-
-  // Default modern Macs to Apple Silicon.
-  return 'Orchestrator-arm64.dmg';
+  return resolvedDownloadUrlsPromise;
 }
 
 async function downloadUrlForLabel(label) {
-  if (label === 'Windows') {
-    return `${RELEASE_DOWNLOAD_BASE}/Orchestrator-x64.exe`;
+  const platformKey = PLATFORM_BY_LABEL[label];
+  if (!platformKey) {
+    return null;
   }
-  if (label === 'Linux') {
-    return `${RELEASE_DOWNLOAD_BASE}/Orchestrator-x86_64.AppImage`;
-  }
-  if (label === 'Mac' || label === 'Mac (Intel)') {
-    const assetName = await resolveMacAssetName(label);
-    return `${RELEASE_DOWNLOAD_BASE}/${assetName}`;
-  }
-  return null;
+
+  const urls = await resolveDownloadUrls();
+  return urls[platformKey] || null;
 }
 
 document.addEventListener(
