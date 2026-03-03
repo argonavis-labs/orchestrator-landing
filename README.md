@@ -51,11 +51,30 @@ Recommended account/platform configuration:
 
 ## Google Ads API Bootstrap
 
+Default GCP project for this repo is stored in `.gcloud-project` (`orchestrator-483621`).
+Scripts in `scripts/google-ads/` will use that automatically unless you pass a project id explicitly.
+
 Use this helper to enable required APIs and create Secret Manager placeholders:
 
 ```bash
-./scripts/google-ads/bootstrap.sh <PROJECT_ID>
+./scripts/google-ads/bootstrap.sh
 ```
+
+Create a 24-hour Search campaign focused on download conversions (default budget: USD 1000/day):
+
+```bash
+python3 -m pip install google-ads
+./scripts/google-ads/create_24h_download_campaign.sh orchestrator-483621 1000
+```
+
+Required populated secrets in project `orchestrator-483621`:
+
+- `GOOGLE_ADS_DEVELOPER_TOKEN`
+- `GOOGLE_ADS_CLIENT_ID`
+- `GOOGLE_ADS_CLIENT_SECRET`
+- `GOOGLE_ADS_REFRESH_TOKEN`
+- `GOOGLE_ADS_LOGIN_CUSTOMER_ID` (optional when not using MCC)
+- `GOOGLE_ADS_CUSTOMER_ID`
 
 ## Development
 

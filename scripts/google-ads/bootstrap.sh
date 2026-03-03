@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-if [[ $# -lt 1 ]]; then
-  echo "Usage: $0 <PROJECT_ID>"
+ROOT_DIR="$(cd "$(dirname "$0")/../.." && pwd)"
+DEFAULT_PROJECT_ID="$(awk 'NF && $1 !~ /^#/ {print $1; exit}' "$ROOT_DIR/.gcloud-project" 2>/dev/null || true)"
+PROJECT_ID="${1:-${GOOGLE_CLOUD_PROJECT:-${CLOUDSDK_CORE_PROJECT:-$DEFAULT_PROJECT_ID}}}"
+
+if [[ -z "$PROJECT_ID" ]]; then
+  echo "Usage: $0 [PROJECT_ID]"
+  echo "Or set GOOGLE_CLOUD_PROJECT/CLOUDSDK_CORE_PROJECT, or add .gcloud-project at repo root."
   exit 1
 fi
-
-PROJECT_ID="$1"
 
 required_cmds=(gcloud)
 for cmd in "${required_cmds[@]}"; do

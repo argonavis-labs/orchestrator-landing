@@ -1,0 +1,5 @@
+# Python cache and local virtualenvs
+__pycache__/
+*.py[cod]
+.venv/
+.venv-google-ads/
