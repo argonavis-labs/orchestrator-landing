@@ -30,6 +30,25 @@ Funnel events emitted by the site:
 - `download_page_view` (`/download` page view)
 - `download_platform_selected` (platform link click)
 
+## SEO and Ads Ops Checklist
+
+Code-level SEO and tracking defaults in this repo now include:
+
+- `robots.txt` and `sitemap.xml`
+- Canonical URLs on homepage and download page
+- Open Graph + Twitter metadata
+- JSON-LD structured data (`SoftwareApplication`, `Organization`, `WebSite`)
+- GA4 + GTM + Google Ads conversion wiring
+
+Recommended account/platform configuration:
+
+- Google Ads: enable **Auto-tagging**
+- Google Ads: keep `download_platform_selected` as **Primary** conversion
+- Google Ads: keep `download_intent` as **Secondary** conversion
+- GA4: link property to Google Ads account
+- Search Console: submit `https://orchest.org/sitemap.xml`
+- DNS: add `www.orchest.org` record + redirect to apex if you want `www` robots checks to pass
+
 ## Google Ads API Bootstrap
 
 Use this helper to enable required APIs and create Secret Manager placeholders:
