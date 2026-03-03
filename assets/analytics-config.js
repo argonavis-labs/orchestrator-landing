@@ -8,7 +8,7 @@ window.ORCHESTRATOR_ANALYTICS_CONFIG = Object.freeze({
   // Optional: map tracked events to Ads conversion send_to values.
   // Example: 'download_platform_selected': 'AW-1234567890/AbCdEfGhIjk'
   googleAdsConversions: Object.freeze({
-    download_intent: 'AW-XXXXXXXXXX/INTENT_LABEL',
-    download_platform_selected: 'AW-XXXXXXXXXX/PLATFORM_LABEL',
+    download_intent: 'AW-17990166575/80atCJLKloIcEK_QsIJD',
+    download_platform_selected: 'AW-17990166575/SgJjCKmQoYIcEK_QsIJD',
   }),
 });
