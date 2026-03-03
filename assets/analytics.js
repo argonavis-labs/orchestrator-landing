@@ -50,7 +50,9 @@
   }
 
   if (hasAnyGtagTarget) {
-    const gtagId = hasGaMeasurementId ? gaMeasurementId : googleAdsId;
+    // Prefer loading gtag.js with the Ads ID so Google Ads tag detection works reliably,
+    // then configure both GA4 and Ads destinations below.
+    const gtagId = hasGoogleAdsId ? googleAdsId : gaMeasurementId;
     loadScript(`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(gtagId)}`);
     window.gtag('js', new Date());
   }
