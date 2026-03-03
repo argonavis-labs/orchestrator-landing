@@ -23,6 +23,57 @@ function knownPlatformLabel(label) {
   return Object.prototype.hasOwnProperty.call(PLATFORM_BY_LABEL, label);
 }
 
+function normalizedPathname() {
+  const pathname = window.location.pathname || '';
+  if (pathname === '/') {
+    return '/';
+  }
+  return pathname.replace(/\/+$/, '');
+}
+
+function isDownloadPage() {
+  return normalizedPathname() === '/download';
+}
+
+function emitTrackingEvent(eventName, payload) {
+  if (!eventName || typeof eventName !== 'string') {
+    return;
+  }
+
+  if (typeof window.orchestratorTrack === 'function') {
+    window.orchestratorTrack(eventName, payload);
+    return;
+  }
+
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event: eventName, ...payload });
+
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', eventName, payload || {});
+  }
+}
+
+function knownPlatformLabelForLink(link) {
+  const datasetLabel = link.getAttribute('data-download-label');
+  if (datasetLabel && knownPlatformLabel(datasetLabel)) {
+    return datasetLabel;
+  }
+
+  const label = (link.textContent || '').replace(/\s+/g, ' ').trim();
+  if (knownPlatformLabel(label)) {
+    return label;
+  }
+
+  return null;
+}
+
+if (isDownloadPage()) {
+  emitTrackingEvent('download_page_view', {
+    source_page: normalizedPathname(),
+    funnel_step: 'download_page',
+  });
+}
+
 function normalizeFeedLinks(payload) {
   const links = payload && typeof payload === 'object' ? payload.links : null;
   if (!links || typeof links !== 'object') {
@@ -88,8 +139,8 @@ document.addEventListener(
       return;
     }
 
-    const label = (link.textContent || '').replace(/\s+/g, ' ').trim();
-    if (!knownPlatformLabel(label)) {
+    const label = knownPlatformLabelForLink(link);
+    if (!label) {
       return;
     }
 
@@ -99,6 +150,21 @@ document.addEventListener(
       if (!url) {
         return;
       }
+
+      const platform = PLATFORM_BY_LABEL[label];
+      const trackingPayload = {
+        platform,
+        platform_label: label,
+        source_page: normalizedPathname(),
+        funnel_step: 'platform_selected',
+      };
+
+      if (typeof window.orchestratorTrackAndNavigate === 'function') {
+        window.orchestratorTrackAndNavigate('download_platform_selected', trackingPayload, url);
+        return;
+      }
+
+      emitTrackingEvent('download_platform_selected', trackingPayload);
       window.location.assign(url);
     });
   },

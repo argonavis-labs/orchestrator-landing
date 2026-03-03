@@ -5,12 +5,38 @@ Static marketing site for [Orchestrator](https://apps.apple.com/app/orchestrator
 ## Pages
 
 - **`index.html`** — Landing page
+- **`download/index.html`** — Download selection page
 - **`privacy.html`** — Privacy Policy
 - **`eula.html`** — End-User License Agreement (EULA)
 - **`terms.html`** — Terms of Service
 - **`google-privacy-policy.html`** — Google OAuth Privacy Policy
 - **`quickbooks-privacy-policy.html`** — QuickBooks OAuth Privacy Policy
 - **`quickbooks-data-deletion.html`** — QuickBooks data deletion instructions
+
+## Analytics Configuration
+
+GA4 and GTM are configured in `assets/analytics-config.js`.
+
+Set:
+
+- `gaMeasurementId` (format `G-...`)
+- `gtmContainerId` (format `GTM-...`)
+- `googleAdsId` (format `AW-...`)
+- `googleAdsConversions` event map (`event_name -> AW-.../...`)
+
+Funnel events emitted by the site:
+
+- `download_intent` (homepage CTA click)
+- `download_page_view` (`/download` page view)
+- `download_platform_selected` (platform link click)
+
+## Google Ads API Bootstrap
+
+Use this helper to enable required APIs and create Secret Manager placeholders:
+
+```bash
+./scripts/google-ads/bootstrap.sh <PROJECT_ID>
+```
 
 ## Development
 
