@@ -157,6 +157,8 @@ document.addEventListener(
         platform_label: label,
         source_page: normalizedPathname(),
         funnel_step: 'platform_selected',
+        value: 1.0,
+        currency: 'USD',
       };
 
       if (typeof window.orchestratorTrackAndNavigate === 'function') {
